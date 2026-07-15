@@ -66,59 +66,6 @@ local function updateCanvas()
 end
 
 local function createSlot()
-
-	slotCount += 1
-	local id = slotCount
-	local y = (id-1)*40
-
-	local label = Instance.new("TextLabel")
-	label.Size = UDim2.new(0,40,0,30)
-	label.Position = UDim2.new(0,0,0,y)
-	label.Text = "SV"..id
-	label.Parent = scroll
-
-	local save = Instance.new("TextButton")
-	save.Size = UDim2.new(0,55,0,30)
-	save.Position = UDim2.new(0,45,0,y)
-	save.Text = "Save"
-	save.Parent = scroll
-
-	local tp = Instance.new("TextButton")
-	tp.Size = UDim2.new(0,55,0,30)
-	tp.Position = UDim2.new(0,105,0,y)
-	tp.Text = "TP"
-	tp.Parent = scroll
-
-	local del = Instance.new("TextButton")
-	del.Size = UDim2.new(0,40,0,30)
-	del.Position = UDim2.new(0,165,0,y)
-	del.Text = "X"
-	del.Parent = scroll
-
-	save.MouseButton1Click:Connect(function()
-		local hrp = (player.Character or player.CharacterAdded:Wait()):WaitForChild("HumanoidRootPart")
-		Saves[id] = hrp.CFrame
-		save.Text = "Saved!"
-		task.wait(0.8)
-		save.Text = "Save"
-	end)
-
-	tp.MouseButton1Click:Connect(function()
-		if Saves[id] then
-			local hrp = (player.Character or player.CharacterAdded:Wait()):WaitForChild("HumanoidRootPart")
-			hrp.CFrame = Saves[id]
-		end
-	end)
-
-	del.MouseButton1Click:Connect(function()
-		Saves[id] = nil
-		label:Destroy()
-		save:Destroy()
-		tp:Destroy()
-		del:Destroy()
-	end)
-
-	updateCanvas()
 end
 
 add.MouseButton1Click:Connect(createSlot)
